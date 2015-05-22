@@ -1,0 +1,30 @@
+{
+  "id": "hello-world",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 256,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "nateleavitt/hello-world",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 1337, "hostPort": 0, "servicePort": 1337, "protocol": "tcp" }
+      ]
+    }
+  },
+  "ports": [0],
+  "cmd":  "node app.js",
+  "healthChecks": [
+    {
+      "protocol": "HTTP",
+      "gracePeriodSeconds": 120,
+      "intervalSeconds": 30,
+      "path": "/",
+      "portIndex": 0,
+      "timeoutSeconds": 10,
+      "maxConsecutiveFailures": 3
+    }
+  ]
+}
+
